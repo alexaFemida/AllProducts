@@ -1,0 +1,61 @@
+﻿@using Products.Helpers
+@model Products.Models.PagedData<Products.Models.Product>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Arrival Date
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Count
+            </th>
+            <th>
+                Is Promo
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Data)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ArrivalDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Count)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsPromo)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+
+    <tfoot>
+        <tr>
+            <td colspan="3">
+                <div class="pagination-centered pager-list">
+                    @Html.PagerListing(Model.CurrentPage, Model.PageSize, Model.TotalItemsCount)
+                </div>
+            </td>
+        </tr>
+    </tfoot>
+</table>
